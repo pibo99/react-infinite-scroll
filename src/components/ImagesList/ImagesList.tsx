@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import ImageCard from "../ImageCard/Image";
 import InfiniteScroll from "../InfiniteScroll/InfiniteScroll";
-import getImageUrl from "../../utilities/getImageUrl";
+import { styled } from "styled-components";
 
 export interface Image {
   id: string;
@@ -10,6 +11,13 @@ export interface Image {
   farm: number;
   title: string;
 }
+
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-gap: 2rem;
+  padding: 1rem;
+`;
 
 function ImagesList() {
   const [images, setImages] = useState<Image[]>([]);
@@ -53,11 +61,11 @@ function ImagesList() {
       onBottomHit={loadMoreImages}
       loadOnMount
     >
-      <ul>
+      <Wrapper>
         {images.map((image) => (
-          <img src={getImageUrl(image)} alt={image.title} />
+          <ImageCard image={image} />
         ))}
-      </ul>
+      </Wrapper>
     </InfiniteScroll>
   );
 }
