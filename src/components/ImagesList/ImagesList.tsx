@@ -10,6 +10,7 @@ export interface Image {
   server: string;
   farm: number;
   title: string;
+  ownername: string;
 }
 
 const Wrapper = styled.div`
@@ -26,7 +27,7 @@ function ImagesList() {
 
   useEffect(() => {
     fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=cacb30411807c228022540ec18bb323e&tags=cats&page=${currentPage}&format=json&nojsoncallback=1`
+      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=cacb30411807c228022540ec18bb323e&tags=cats&extras=owner_name&page=${currentPage}&format=json&nojsoncallback=1`
     )
       .then((res) =>
         res.json().then((data) => {
@@ -42,7 +43,7 @@ function ImagesList() {
     setCurrentPage((page) => page + 1);
     setIsLoading(true);
     fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=cacb30411807c228022540ec18bb323e&tags=cats&page=${currentPage}&format=json&nojsoncallback=1`
+      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=cacb30411807c228022540ec18bb323e&tags=cats&extras=owner_name&page=${currentPage}&format=json&nojsoncallback=1`
     )
       .then((res) =>
         res.json().then((data) => {

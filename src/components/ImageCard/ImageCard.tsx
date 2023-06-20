@@ -1,7 +1,7 @@
+import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import getImageUrl from "../../utilities/getImageUrl";
 import { Image } from "../ImagesList/ImagesList";
-import { useEffect, useState } from "react";
 
 interface Props {
   image: Image;
@@ -75,10 +75,10 @@ function ImageCard({ image }: Props) {
 
   return (
     <Wrapper>
-      <CardImage src={getImageUrl(image)} alt={image.title} />
+      <CardImage src={getImageUrl(image)} alt={image.title + image.ownername} />
       <ImageDescription>
         <ImageTitle>{formatImageTitle(image.title) || "No title"}</ImageTitle>
-        <ImageAuthor>nick debris</ImageAuthor>
+        <ImageAuthor>{image.ownername || "Anonymous"}</ImageAuthor>
         <FavouriteButton
           onClick={() => {
             localStorage.setItem("image" + image.id, "true");
