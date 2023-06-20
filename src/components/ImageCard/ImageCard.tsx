@@ -12,29 +12,61 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
-const CardContent = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  color: white;
-  width: 50px;
-`;
-
 const CardImage = styled.img`
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
 `;
 
+const ImageDescription = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.25s;
+
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const ImageTitle = styled.span`
+  font-size: 2rem;
+  text-decoration: underline;
+`;
+
+const ImageAuthor = styled.span`
+  font-size: 1.25rem;
+`;
+
+const FavouriteButton = styled.button`
+  border: 1px solid white;
+  padding: 14px 28px;
+  font-size: 16px;
+  background: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 50px;
+  font-weight: bold;
+`;
+
 function ImageCard({ image }: Props) {
-  const [isHovering, setIsHovering] = useState(false);
   return (
-    <Wrapper
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
-    >
-      {isHovering && <CardContent>{image.title}</CardContent>}
+    <Wrapper>
       <CardImage src={getImageUrl(image)} alt={image.title} />
+      <ImageDescription>
+        <ImageTitle>{image.title || "No title"}</ImageTitle>
+        <ImageAuthor>nick debris</ImageAuthor>
+        <FavouriteButton>Favourite</FavouriteButton>
+      </ImageDescription>
     </Wrapper>
   );
 }
