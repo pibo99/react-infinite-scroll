@@ -15,6 +15,7 @@ const GlobalStyles = createGlobalStyle`
 html, body {
   height: 100%;
   background: #E7E7E7;
+  font-family: 'Titillium Web', sans-serif;
 }
 
 body {
