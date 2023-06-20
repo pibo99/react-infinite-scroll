@@ -22,11 +22,11 @@ const Wrapper = styled.div`
 function ImagesList() {
   const [images, setImages] = useState<Image[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=cacb30411807c228022540ec18bb323e&page=1&format=json&nojsoncallback=2`
+      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=cacb30411807c228022540ec18bb323e&tags=cats&page=${currentPage}&format=json&nojsoncallback=1`
     )
       .then((res) =>
         res.json().then((data) => {
@@ -42,7 +42,7 @@ function ImagesList() {
     setCurrentPage((page) => page + 1);
     setIsLoading(true);
     fetch(
-      "https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=cacb30411807c228022540ec18bb323e&page=2&format=json&nojsoncallback=2"
+      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=cacb30411807c228022540ec18bb323e&tags=cats&page=${currentPage}&format=json&nojsoncallback=1`
     )
       .then((res) =>
         res.json().then((data) => {
