@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import getImageUrl from "../../utilities/getImageUrl";
 import { Image } from "../ImagesList/ImagesList";
+import { useEffect, useState } from "react";
 
 interface Props {
   image: Image;
@@ -56,20 +57,32 @@ const FavouriteButton = styled.button`
   cursor: pointer;
   border-radius: 23px;
   font-weight: bold;
-
-  /* &:hover {
-    background: #e7e7e7;
-  } */
+  margin-top: 16px;
 `;
 
 function ImageCard({ image }: Props) {
+  const [isFavourite, setIsFavourite] = useState<boolean>();
+  useEffect(() => {
+    const item = localStorage.getItem("image" + image.id);
+    if (item) {
+      setIsFavourite(true);
+    }
+  });
+
   return (
     <Wrapper>
       <CardImage src={getImageUrl(image)} alt={image.title} />
       <ImageDescription>
         <ImageTitle>{image.title || "No title"}</ImageTitle>
         <ImageAuthor>nick debris</ImageAuthor>
-        <FavouriteButton>Favourite</FavouriteButton>
+        <FavouriteButton
+          onClick={() => {
+            localStorage.setItem("image" + image.id, "true");
+            setIsFavourite(true);
+          }}
+        >
+          {isFavourite ? <span>Saved!</span> : <span>Favourite</span>}
+        </FavouriteButton>
       </ImageDescription>
     </Wrapper>
   );
