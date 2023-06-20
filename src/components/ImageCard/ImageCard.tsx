@@ -60,6 +60,10 @@ const FavouriteButton = styled.button`
   margin-top: 16px;
 `;
 
+function formatImageTitle(title: Image["title"]): string {
+  return title.length > 20 ? title.substring(0, 20) + "..." : title;
+}
+
 function ImageCard({ image }: Props) {
   const [isFavourite, setIsFavourite] = useState<boolean>();
   useEffect(() => {
@@ -73,7 +77,7 @@ function ImageCard({ image }: Props) {
     <Wrapper>
       <CardImage src={getImageUrl(image)} alt={image.title} />
       <ImageDescription>
-        <ImageTitle>{image.title || "No title"}</ImageTitle>
+        <ImageTitle>{formatImageTitle(image.title) || "No title"}</ImageTitle>
         <ImageAuthor>nick debris</ImageAuthor>
         <FavouriteButton
           onClick={() => {
