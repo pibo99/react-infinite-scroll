@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { styled, keyframes } from "styled-components";
+import { ReactElement, useEffect, useRef, useState } from "react";
+import { styled } from "styled-components";
 
 const Spinner = () => (
   <StyledSpinner viewBox="0 0 50 50">
@@ -51,7 +51,7 @@ interface Props {
   onBottomHit: () => void;
   isLoading: boolean;
   loadOnMount: boolean;
-  children: any;
+  children: ReactElement;
 }
 
 function hasHitBottom(ref: React.RefObject<HTMLDivElement>) {

@@ -5,10 +5,8 @@ import { styled } from "styled-components";
 
 export interface Image {
   id: string;
-  owner: string;
   secret: string;
   server: string;
-  farm: number;
   title: string;
   ownername: string;
 }
@@ -25,10 +23,10 @@ function ImagesList() {
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
+  const API_URL = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=cacb30411807c228022540ec18bb323e&tags=cats&extras=owner_name&page=${currentPage}&format=json&nojsoncallback=1`;
+
   useEffect(() => {
-    fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=cacb30411807c228022540ec18bb323e&tags=cats&extras=owner_name&page=${currentPage}&format=json&nojsoncallback=1`
-    )
+    fetch(API_URL)
       .then((res) =>
         res.json().then((data) => {
           setImages(data.photos.photo);
@@ -42,9 +40,7 @@ function ImagesList() {
   const loadMoreImages = () => {
     setCurrentPage((page) => page + 1);
     setIsLoading(true);
-    fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=cacb30411807c228022540ec18bb323e&tags=cats&extras=owner_name&page=${currentPage}&format=json&nojsoncallback=1`
-    )
+    fetch(API_URL)
       .then((res) =>
         res.json().then((data) => {
           setIsLoading(false);
