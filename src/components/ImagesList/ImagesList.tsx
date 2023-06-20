@@ -59,8 +59,8 @@ function ImagesList() {
       loadOnMount
     >
       <Wrapper>
-        {images.map((image) => (
-          <ImageCard image={image} />
+        {images.map((image, index) => (
+          <ImageCard key={image.id + index} image={image} />
         ))}
       </Wrapper>
     </InfiniteScroll>
