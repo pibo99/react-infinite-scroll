@@ -1,15 +1,15 @@
 import { styled } from "styled-components";
 import getImageUrl from "../../utilities/getImageUrl";
 import { Image } from "../ImagesList/ImagesList";
-import { useState } from "react";
 
 interface Props {
   image: Image;
 }
 
 const Wrapper = styled.div`
-  box-shadow: 2px 2px #d1d3d2;
+  box-shadow: 3px 3px #d1d3d2;
   position: relative;
+  border-radius: 6px;
 `;
 
 const CardImage = styled.img`
@@ -54,8 +54,12 @@ const FavouriteButton = styled.button`
   background: none;
   color: white;
   cursor: pointer;
-  border-radius: 50px;
+  border-radius: 23px;
   font-weight: bold;
+
+  /* &:hover {
+    background: #e7e7e7;
+  } */
 `;
 
 function ImageCard({ image }: Props) {
