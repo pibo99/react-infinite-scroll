@@ -17,6 +17,7 @@ const CardImage = styled.img`
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+  border-radius: 6px;
 `;
 
 const ImageDescription = styled.div`
