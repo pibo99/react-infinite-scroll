@@ -43,6 +43,7 @@ const ImageDescription = styled.div`
 const ImageTitle = styled.span`
   font-size: 2rem;
   text-decoration: underline;
+  text-decoration-skip-ink: none;
 `;
 
 const ImageAuthor = styled.span`
@@ -61,7 +62,7 @@ const FavouriteButton = styled.button`
   margin-top: 16px;
 `;
 
-function formatImageTitle(title: Image["title"]): string {
+function formatImageInfo(title: Image["title"]): string {
   return title.length > 20 ? title.substring(0, 20) + "..." : title;
 }
 
@@ -78,8 +79,10 @@ function ImageCard({ image }: Props) {
     <Wrapper>
       <CardImage src={getImageUrl(image)} alt={image.title + image.ownername} />
       <ImageDescription>
-        <ImageTitle>{formatImageTitle(image.title) || "No title"}</ImageTitle>
-        <ImageAuthor>{image.ownername || "Anonymous"}</ImageAuthor>
+        <ImageTitle>{formatImageInfo(image.title) || "No title"}</ImageTitle>
+        <ImageAuthor>
+          {formatImageInfo(image.ownername) || "Anonymous"}
+        </ImageAuthor>
         <FavouriteButton
           onClick={() => {
             localStorage.setItem("image" + image.id, "true");
